@@ -28,5 +28,6 @@ func NewHandlerFamily(Service family.FamilyService, e *echo.Echo) {
 
 	e.POST("/costumer/family", handlers.AddFamily, middlewares.JWTMiddleware())
 	e.GET("/costumer/family", handlers.MyFamily, middlewares.JWTMiddleware())
-
+	e.PUT("/costumer/family/:id", handlers.UpdateFamily, middlewares.JWTMiddleware())
+	e.DELETE("/costumer/family/:id", handlers.DeleteFamily, middlewares.JWTMiddleware())
 }

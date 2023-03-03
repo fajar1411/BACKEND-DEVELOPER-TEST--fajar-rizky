@@ -9,7 +9,7 @@ import (
 type Family struct {
 	gorm.Model
 	Relation     string `gorm:"type:varchar(50);not null"`
-	NameRelation string `gorm:"type:varchar(50);not null"`
+	NameRelation string `gorm:"type:varchar(50);uniqueIndex;not null"`
 	Dob          string `gorm:"type:varchar(50);not null"`
 	CustomerID   uint
 }
@@ -38,7 +38,15 @@ func (dataModel *FamilyUser) ModelsToCore() family.FamilyEntities { //fungsi yan
 		Name:         dataModel.Name,
 	}
 }
-
+func ToCore(data Family) family.FamilyEntities {
+	return family.FamilyEntities{
+		ID:           data.ID,
+		Relation:     data.Relation,
+		NameRelation: data.NameRelation,
+		Dob_date:     data.Dob,
+		CustomerID:   data.CustomerID,
+	}
+}
 func ListModelTOCore(dataModel []FamilyUser) []family.FamilyEntities { //fungsi yang mengambil data dari  user gorm(model.go)  dan merubah data ke entities usercore
 	var dataCore []family.FamilyEntities
 	for _, value := range dataModel {

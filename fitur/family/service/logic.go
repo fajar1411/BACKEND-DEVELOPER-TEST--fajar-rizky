@@ -59,6 +59,42 @@ func (fc *familyCase) MyFamily(userID int) ([]family.FamilyEntities, error) {
 }
 
 // UpdateFamily implements family.FamilyService
-func (*familyCase) UpdateFamily(updata family.FamilyEntities) (family.FamilyEntities, error) {
-	panic("unimplemented")
+func (fc *familyCase) UpdateFamily(id int, updata family.FamilyEntities) (family.FamilyEntities, error) {
+	valerr := fc.vld.Struct(&updata)
+	if updata.CustomerID <= 0 {
+		log.Print("User belum terdaftar")
+	}
+	if valerr != nil {
+		log.Println("validation error", valerr)
+		msg := validasi.ValidationErrorHandle(valerr)
+		return family.FamilyEntities{}, errors.New(msg)
+	}
+	res, err := fc.qry.UpdateFamily(id, updata)
+	if err != nil {
+		// fmt.Println(err)
+		msg := ""
+		if strings.Contains(err.Error(), "duplicate entry") {
+			msg = "Relation Name Cannot Be The Same"
+		} else {
+			msg = "internal server error"
+		}
+		return family.FamilyEntities{}, errors.New(msg)
+	}
+
+	return res, nil
+}
+
+// DeleteFamily implements family.FamilyService
+func (fc *familyCase) DeleteFamily(iduser int, id int) error {
+	if iduser <= 0 {
+		log.Print("User belum terdaftar")
+	}
+	err := fc.qry.DeleteFamily(iduser, id)
+
+	if err != nil {
+		log.Println("query error", err.Error())
+		return errors.New("query error, delete account fail")
+	}
+
+	return nil
 }

@@ -53,6 +53,39 @@ func (fd *familyData) MyFamily(userID int) ([]family.FamilyEntities, error) {
 }
 
 // UpdateFamily implements family.FamilyData
-func (*familyData) UpdateFamily(updata family.FamilyEntities) (family.FamilyEntities, error) {
-	panic("unimplemented")
+func (fd *familyData) UpdateFamily(id int, updata family.FamilyEntities) (family.FamilyEntities, error) {
+
+	data := Todata(updata)
+	qry := fd.db.Model(&data).Where("id = ?", id).Updates(&data)
+	affrows := qry.RowsAffected
+	if affrows == 0 {
+		log.Println("no rows affected")
+		return family.FamilyEntities{}, errors.New("no data updated")
+	}
+	err := qry.Error
+	if err != nil {
+		log.Println("update user query error", err.Error())
+		return family.FamilyEntities{}, err
+	}
+
+	return ToCore(data), nil
+}
+
+// DeleteFamily implements family.FamilyData
+func (fd *familyData) DeleteFamily(iduser int, id int) error {
+	var Family Family
+	tx := fd.db.Where("id = ? AND families.customer_id = ?", id, iduser).Delete(&Family, id)
+	rowAffect := tx.RowsAffected
+	if rowAffect <= 0 {
+		log.Println("no data processed")
+		return errors.New("no user has delete")
+	}
+
+	err := tx.Error
+	if err != nil {
+		log.Println("delete query error", err.Error())
+		return errors.New("delete Family fail")
+	}
+
+	return nil
 }
