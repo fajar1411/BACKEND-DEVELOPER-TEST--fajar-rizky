@@ -54,13 +54,15 @@ func (cd *costumerData) Login(email string) (customer.CustomerEntites, error) {
 
 // Profile implements customer.CostumerData
 func (cd *costumerData) Profile(id int) (customer.CustomerEntites, error) {
-	users := Customer{}
-	if err := cd.db.Where("id = ?", id).First(&users).Error; err != nil {
-		log.Println("Get By ID query error", err.Error())
+	users := CustomerName{}
+	err := cd.db.Raw("SELECT customers.dob_date, customers.email, customers.phonenum, nationalities.nationality_name, customers.name FROM customers JOIN nationalities ON nationalities.id = customers.nationalities_id WHERE customers.id = ?", id).Find(&users).Error
+
+	if err != nil {
 		return customer.CustomerEntites{}, err
 	}
 	gorms := users.ModelsToCore()
 	return gorms, nil
+
 }
 
 // Delete implements customer.CostumerData

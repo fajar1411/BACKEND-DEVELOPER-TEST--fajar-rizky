@@ -38,3 +38,16 @@ func ValidationErrorHandle(err error) string {
 
 	return message
 }
+
+func CaseNation(id string) uint {
+	var message uint
+
+	switch id {
+	case "indonesia":
+		message = 1
+	case "england":
+		message = 2
+
+	}
+	return message
+}

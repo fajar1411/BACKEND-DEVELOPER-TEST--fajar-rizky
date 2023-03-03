@@ -51,7 +51,7 @@ func (cd *CustomerHandler) Profile(c echo.Context) error {
 	if err != nil {
 		return c.JSON(helper.PesanGagalHelper(err.Error()))
 	}
-	dataResp := ToFormResponse(res)
+	dataResp := ToProfileResponse(res)
 	return c.JSON(http.StatusOK, helper.PesanDataBerhasilHelper("Melihat Profile Berhasil", dataResp))
 }
 func (cd *CustomerHandler) Update(c echo.Context) error {

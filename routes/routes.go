@@ -5,6 +5,8 @@ import (
 	handlercostumer "test/fitur/customer/handler"
 	family "test/fitur/family"
 	handlerfamily "test/fitur/family/handler"
+	"test/fitur/national"
+	handlernational "test/fitur/national/handler"
 	"test/middlewares"
 
 	"github.com/labstack/echo/v4"
@@ -30,4 +32,12 @@ func NewHandlerFamily(Service family.FamilyService, e *echo.Echo) {
 	e.GET("/costumer/family", handlers.MyFamily, middlewares.JWTMiddleware())
 	e.PUT("/costumer/family/:id", handlers.UpdateFamily, middlewares.JWTMiddleware())
 	e.DELETE("/costumer/family/:id", handlers.DeleteFamily, middlewares.JWTMiddleware())
+}
+func NewHandlerNational(Service national.NationalService, e *echo.Echo) {
+	handlers := &handlernational.NationalHandler{
+		NationalServices: Service,
+	}
+
+	e.POST("/national", handlers.AddNational)
+
 }
