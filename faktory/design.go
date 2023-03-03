@@ -5,8 +5,11 @@ import (
 	customerservice "test/fitur/customer/service"
 	familydata "test/fitur/family/data"
 	familyservice "test/fitur/family/service"
+	nationaldata "test/fitur/national/data"
+	nationalservice "test/fitur/national/service"
 	customerhandler "test/routes"
 	familyhandler "test/routes"
+	nationalhandler "test/routes"
 
 	"github.com/go-playground/validator/v10"
 	"github.com/labstack/echo/v4"
@@ -24,4 +27,7 @@ func InitFactory(e *echo.Echo, db *gorm.DB) {
 	familyServiceFaktory := familyservice.NewService(familyRepofaktory, v)
 	familyhandler.NewHandlerFamily(familyServiceFaktory, e)
 
+	nationaldatafaktory := nationaldata.NewNational(db)
+	nationalserviceFaktory := nationalservice.NewService(nationaldatafaktory, v)
+	nationalhandler.NewHandlerNational(nationalserviceFaktory, e)
 }

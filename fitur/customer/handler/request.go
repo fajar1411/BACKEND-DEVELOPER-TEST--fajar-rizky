@@ -3,11 +3,12 @@ package handler
 import "test/fitur/customer"
 
 type CostumerRequest struct {
-	Name     string `json:"name" form:"nama"`
-	Dob_date string `json:"tanggal" form:"tanggal"`
-	Phonenum string `json:"phone" form:"phone"`
-	Email    string `json:"email" form:"email"`
-	Password string `json:"password" form:"password"`
+	Name            string `json:"name" form:"nama"`
+	Dob_date        string `json:"tanggal" form:"tanggal"`
+	Phonenum        string `json:"phone" form:"phone"`
+	Email           string `json:"email" form:"email"`
+	Password        string `json:"password" form:"password"`
+	NationalitiesID uint   `json:"id" form:"id"`
 }
 type LoginRequest struct {
 	Email    string `json:"email" form:"email"`
@@ -21,5 +22,6 @@ func CostumerRequestToUserCore(data CostumerRequest) customer.CustomerEntites {
 		Phonenum: data.Phonenum,
 		Email:    data.Email,
 		Password: data.Password,
+		Nasional: data.NationalitiesID,
 	}
 }

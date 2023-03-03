@@ -4,8 +4,7 @@ import (
 	"fmt"
 	"log"
 	"test/config"
-	customer "test/fitur/customer/data"
-	family "test/fitur/family/data"
+	"test/migrate"
 
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
@@ -18,13 +17,7 @@ func InitDB(cfg *config.AppConfig) *gorm.DB {
 		log.Fatal("Cannot connect to DB")
 	}
 
-	MigrateDB(db)
+	migrate.MigrateDB(db)
 
 	return db
-}
-
-func MigrateDB(db *gorm.DB) {
-	db.AutoMigrate(&customer.Customer{})
-	db.AutoMigrate(&family.Family{})
-
 }

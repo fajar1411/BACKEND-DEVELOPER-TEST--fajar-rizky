@@ -1,13 +1,14 @@
 package customer
 
 type CustomerEntites struct {
-	ID       uint
-	Name     string `validate:"required,min=5,required"`
-	Dob_date string
-	Phonenum string `validate:"required,min=5,required"`
-	Email    string `validate:"required,email"`
-	Password string `validate:"required,min=5,required"`
-	Nasional uint
+	ID           uint
+	Name         string `validate:"required,min=5,required"`
+	Dob_date     string
+	Phonenum     string `validate:"required,min=5,required"`
+	Email        string `validate:"required,email"`
+	Password     string `validate:"required,min=5,required"`
+	Nasional     uint
+	NationalName string
 }
 
 type CostumerService interface {
