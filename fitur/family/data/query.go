@@ -41,7 +41,7 @@ func (fd *familyData) AddFamily(newFamily family.FamilyEntities) (family.FamilyE
 // MyFamily implements family.FamilyData
 func (fd *familyData) MyFamily(userID int) ([]family.FamilyEntities, error) {
 	myfamily := []FamilyUser{}
-	err := fd.db.Raw("SELECT families.id, families.relation,  families.name_relation, families.dob, customers.name FROM families JOIN customers ON customers.id = families.customer_id WHERE families.deleted_at IS NULL  && families.customer_id = ?", userID).Find(&myfamily).Error
+	err := fd.db.Raw("SELECT families.id, families.relation,  families.name_relation, families.dob, customers.name FROM families JOIN customers ON customers.id = families.customer_id WHERE families.deleted_at IS NULL  AND families.customer_id = ?", userID).Find(&myfamily).Error
 
 	if err != nil {
 		return nil, err
