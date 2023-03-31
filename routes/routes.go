@@ -1,12 +1,10 @@
 package routes
 
 import (
-	customer "test/fitur/customer"
-	handlercostumer "test/fitur/customer/handler"
-	family "test/fitur/family"
-	handlerfamily "test/fitur/family/handler"
-	"test/fitur/national"
-	handlernational "test/fitur/national/handler"
+	owner "test/fitur/owner"
+	handlerowner "test/fitur/owner/handler"
+	customer "test/fitur/user"
+	handlercostumer "test/fitur/user/handler"
 	"test/middlewares"
 
 	"github.com/labstack/echo/v4"
@@ -18,26 +16,17 @@ func NewHandlerCostumer(Service customer.CostumerService, e *echo.Echo) {
 	}
 
 	e.POST("/costumer/form", handlers.FormData)
+	e.POST("/admin/form", handlers.FormAdmin)
 	e.POST("/costumer/login", handlers.Login)
 	e.GET("/costumer/profile", handlers.Profile, middlewares.JWTMiddleware())
 	e.PUT("/costumer", handlers.Update, middlewares.JWTMiddleware())
 	e.DELETE("/costumer", handlers.Delete, middlewares.JWTMiddleware())
 }
-func NewHandlerFamily(Service family.FamilyService, e *echo.Echo) {
-	handlers := &handlerfamily.FamilyHandler{
-		FamilyServices: Service,
+func NewHandlerOwner(Service owner.OwnerService, e *echo.Echo) {
+	handlers := &handlerowner.OwnerHandler{
+		OwnerServices: Service,
 	}
 
-	e.POST("/costumer/family", handlers.AddFamily, middlewares.JWTMiddleware())
-	e.GET("/costumer/family", handlers.MyFamily, middlewares.JWTMiddleware())
-	e.PUT("/costumer/family/:id", handlers.UpdateFamily, middlewares.JWTMiddleware())
-	e.DELETE("/costumer/family/:id", handlers.DeleteFamily, middlewares.JWTMiddleware())
-}
-func NewHandlerNational(Service national.NationalService, e *echo.Echo) {
-	handlers := &handlernational.NationalHandler{
-		NationalServices: Service,
-	}
-
-	e.POST("/national", handlers.AddNational)
+	e.POST("/costumer/owner", handlers.AddOwner, middlewares.JWTMiddleware())
 
 }

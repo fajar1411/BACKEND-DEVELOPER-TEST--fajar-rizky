@@ -67,3 +67,9 @@ func PesanDataBerhasilHelper(msg string, data any) map[string]any {
 		"MSG":  msg,
 	}
 }
+func FailedResponse(msg string) map[string]any {
+	return map[string]any{
+		"status":  "failed",
+		"message": msg,
+	}
+}
