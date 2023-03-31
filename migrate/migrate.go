@@ -1,16 +1,14 @@
 package migrate
 
 import (
-	customer "test/fitur/customer/data"
-	family "test/fitur/family/data"
-	national "test/fitur/national/data"
+	owner "test/fitur/owner/data"
+	user "test/fitur/user/data"
 
 	"gorm.io/gorm"
 )
 
 func MigrateDB(db *gorm.DB) {
-	db.AutoMigrate(&customer.Customer{})
-	db.AutoMigrate(&family.Family{})
-	db.AutoMigrate(&national.Nationality{})
+	db.AutoMigrate(&user.User{})
+	db.AutoMigrate(&owner.Owner{})
 
 }
