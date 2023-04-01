@@ -32,7 +32,8 @@ jobs:
          key: ${{ secrets.SSHKEY }}
          port: ${{ secrets.PORT }}
          script: |
-          sudo chmod 777 /var/run/docker.sock
+          sudo chmod 777 /var/run/docker.sock0
+          cd /frizky861/olshop/toko/toko
           git pull origin main 
           docker stop toko 
           docker rm toko
