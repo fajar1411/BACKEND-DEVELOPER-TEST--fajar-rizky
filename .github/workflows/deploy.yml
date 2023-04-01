@@ -31,8 +31,6 @@ jobs:
           key: ${{ secrets.SSHKEY }}
           port: ${{ secrets.PORT }}
           script: |
-            touch works.txt
-            echo "Great, it works! at $(date)" >> works.txt
             sudo chmod 777 /var/run/docker.sock
             docker rmi ${{ secrets.DOCKER_USER }}/${{ secrets.IMAGE }}:latest
             docker pull ${{ secrets.DOCKER_USER }}/${{ secrets.IMAGE }}:latest
