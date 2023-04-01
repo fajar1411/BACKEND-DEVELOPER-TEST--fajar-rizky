@@ -33,7 +33,6 @@ jobs:
          port: ${{ secrets.PORT }}
          script: |
           cd /home/frizky861/olshop
-          git clone https://github.com/fajar1411/toko
           sudo chmod 777 /var/run/docker.sock
           git pull origin main 
           docker stop toko 
