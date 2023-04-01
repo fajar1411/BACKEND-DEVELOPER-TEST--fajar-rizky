@@ -1,4 +1,4 @@
-FROM golang:1.20-alpine 
+FROM golang:1.20-alpine  as build
 
 # membuat direktori app
 RUN mkdir /app
