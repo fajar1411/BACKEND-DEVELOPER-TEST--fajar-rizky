@@ -40,8 +40,8 @@ jobs:
           key: ${{ secrets.KEY }}
           port: ${{ secrets.PORT }}
           script: |
-            docker stop be-images 
-            docker rm be-images
+            docker stop toko-images 
+            docker rm toko-images
             docker rmi ${{ secrets.DOCKER_USER }}/toko-images:latest
             docker pull ${{ secrets.DOCKER_USER }}/toko-images:latest
             docker run -d -p 8080:8080 -e SERVER_PORT=${{ secrets.SERVER_PORT }} -e JWT_SECRET=${{ secrets.JWT_SECRET }} -e DB_USERNAME=${{ secrets.DB_USERNAME }} -e DB_PASSWORD=${{ secrets.DB_PASSWORD }} -e DB_HOST=${{ secrets.DB_HOST }} -e DB_PORT=${{ secrets.DB_PORT }} -e DB_NAME=${{ secrets.DB_NAME }} -e CLOUDINARY_API_KEY=${{secrets.CLOUDINARY_API_KEY}} -e CLOUDINARY_API_SECRET=${{secrets.CLOUDINARY_API_SECRET}} -e CLOUDINARY_CLOUD_NAME=${{secrets.CLOUDINARY_CLOUD_NAME}}  --name toko-images ${{ secrets.DOCKER_USER }}/toko-images:latest
