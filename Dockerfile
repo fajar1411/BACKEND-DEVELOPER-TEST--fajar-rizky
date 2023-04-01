@@ -1,12 +1,12 @@
 FROM golang:1.20-alpine  as build
 
 # membuat direktori app
-RUN mkdir /app
+RUN mkdir /toko
 
 # set working directory /app
-WORKDIR /app
+WORKDIR /toko
 
-COPY ./ /app
+COPY ./ /toko
 
 RUN go mod tidy
 
