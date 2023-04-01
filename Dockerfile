@@ -1,15 +1,16 @@
 FROM golang:1.20-alpine  as build
 
-# membuat direktori app
-RUN mkdir /olshop
+##buat folder APP
+RUN mkdir /app
 
-# set working directory /app
-WORKDIR /olshop
+##set direktori utama
+WORKDIR /app
 
-COPY ./ /olshop
+##copy seluruh file ke app
+ADD . /app
 
-RUN go mod tidy
+##buat executeable
+RUN go build -o main .
 
-RUN go build -o olshop
-
-CMD ["./olshop"]
+##jalankan executeable
+CMD ["/app/main"]
