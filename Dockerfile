@@ -1,15 +1,15 @@
 FROM golang:1.20-alpine  as build
 
 # membuat direktori app
-RUN mkdir /toko
+RUN mkdir /olshop
 
 # set working directory /app
-WORKDIR /toko
+WORKDIR /olshop
 
-COPY ./ /toko
+COPY ./ /olshop
 
 RUN go mod tidy
 
-RUN go build -o toko
+RUN go build -o olshop
 
-CMD ["./toko"]
+CMD ["./olshop"]
