@@ -32,12 +32,12 @@ jobs:
          key: ${{ secrets.SSHKEY }}
          port: ${{ secrets.PORT }}
          script: |
-          cd /home/frizky861/olshop
+          cd /home/frizky861/olshop/toko
           sudo chmod 777 /var/run/docker.sock
           git pull origin main 
-          docker stop olshop
-          docker rm olshop
+          docker stop testoko
+          docker rm testoko
           docker rmi ${{ secrets.DOCKER_USER }}/${{ secrets.IMAGE }}:latest
           docker pull ${{ secrets.DOCKER_USER }}/${{ secrets.IMAGE }}:latest
-          docker run -d -p 8080:8080 -e SERVER_PORT=${{ secrets.SERVER_PORT }} -e DBUSER=${{ secrets.DBUSER }} -e DBPASS=${{ secrets.DBPASS }} -e DBHOST=${{ secrets.DBHOST }} -e DBPORT=${{ secrets.DBPORT }} -e DBNAME=${{ secrets.DBNAME }} -e AWS_BUCKET_NAME=${{secrets.AWS_BUCKET_NAME}} -e CLOUDINARY_CLOUD_NAME=${{ secrets.CLOUDINARY_CLOUD_NAME }} -e CLOUDINARY_API_KEY=${{ secrets.CLOUDINARY_API_KEY }} -e CLOUDINARY_API_SECRET=${{ secrets.CLOUDINARY_API_SECRET }}  -e AWS_REGION=${{secrets.AWS_REGION}} -e ACCESS_KEY_IAM=${{secrets.ACCESS_KEY_IAM}} -e SECRET_KEY_IAM=${{secrets.SECRET_KEY_IAM}} --name olshop ${{ secrets.DOCKER_USER }}//${{ secrets.IMAGE }}:latest
+          docker run -d -p 8080:8080 -e SERVER_PORT=${{ secrets.SERVER_PORT }} -e DBUSER=${{ secrets.DBUSER }} -e DB_PASSWORD=${{ secrets.DB_PASSWOD }} -e DB_HOST=${{ secrets.DB_HOST }} -e DB_PORT=${{ secrets.DB_PORT }} -e DB_NAME=${{ secrets.DB_NAME }} -e CLOUDINARY_CLOUD_NAME=${{ secrets.CLOUDINARY_CLOUD_NAME }} -e CLOUDINARY_API_KEY=${{ secrets.CLOUDINARY_API_KEY }} -e CLOUDINARY_API_SECRET=${{ secrets.CLOUDINARY_API_SECRET }}   --name testoko ${{ secrets.DOCKER_USER }}//${{ secrets.IMAGE }}:latest
 
