@@ -33,7 +33,7 @@ jobs:
          port: ${{ secrets.PORT }}
          script: |
           cd /home/frizky861/testoko/toko
-          sudo chmod 777 /var/run/docker.sock
+          chmod 777 /var/run/docker.sock
           git pull origin main 
           docker stop testoko
           docker rm testoko
