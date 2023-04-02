@@ -10,7 +10,7 @@ WORKDIR /app
 ADD . /app
 
 ##buat executeable
-RUN go build -o toko
+RUN go build -o toko .
 
 ##jalankan executeable
-CMD ["/toko"]
+CMD ["/app/toko"]
